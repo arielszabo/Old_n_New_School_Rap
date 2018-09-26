@@ -3,8 +3,9 @@ from bs4 import BeautifulSoup
 import os
 import json
 import logging
+import pandas as pd
 
-
+# todo: don't extract same songs
 class GeniusScraper(object):
     def __init__(self, GENIUS_API_KEY):
         self.base_url = 'http://api.genius.com'
@@ -59,25 +60,45 @@ class GeniusScraper(object):
 
     def songs_lyrics_by_artist(self, artist_name, number_of_songs_desired):
         artist_id = self.get_artist_id(artist_name)
-        print(artist_id)
         if artist_id:  # if it is not None
             song_urls = self.get_artist_songs(artist_id, number_of_songs_desired)
 
             lyrics = [self.extract_lyrics_from_webpage(url) for url in song_urls]
             return lyrics
+        else:
+            logging.warning(f"Can't find {artist_name}")
 
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s : %(levelname)s : %(message)s')
 
     genius = GeniusScraper('l57FUc_YCYz4NlE_jotgLPlMFi9lBxUxMYlg39K20JUNcT5TQtU1vXiptDcge96G')
-    x = genius.songs_lyrics_by_artist('2pac', 100)
-    print(x)
-    print(len(x))
+    # x = genius.songs_lyrics_by_artist('2pac', 100)
+    # print(x)
+    # print(len(x))
 
-    old_school_rappers = ['2pac', 'Jay-Z', 'Eazy-E', 'The Notorious B.I.G.', 'Nas', 'Dr. Dre', 'Ice Cube', 'Snoop Dogg',
-                          'Moobb Deep', 'Big L']
-    new_school_rappers = []
+    rappers = {
+        'old_school_rappers': ['2pac', 'Jay-Z', 'Eazy-E', 'The Notorious B.I.G.', 'Nas', 'Ice Cube',
+                               'Snoop Dogg', 'Mobb Deep', 'Big L', "Lil' Kim"],
+        'new_school_rappers': ['Tyler, the Creator', 'Schoolboy Q', 'Travis Scott', 'Big Sean', 'Chance The Rapper',
+                               'A$AP Rocky', 'J. Cole', 'Drake', 'Wiz Khalifa', 'Nicki Minaj'],
+    }
+
+    data = []
+    for rapper_type in rappers:
+        for rapper in rappers[rapper_type]:
+            logging.info(f'Start extraction of a 100 songs by {rapper}')
+            songs_lyrics = genius.songs_lyrics_by_artist(rapper, 100)
+            df = pd.DataFrame(songs_lyrics, columns=['lyrics'])
+            df['artist'] = rapper
+            df['rapper_type'] = rapper_type
+            data.append(df)
+
+    final_data = pd.concat(data, ignore_index=True)
+    print(final_data)
+    final_data.to_excel(r'lyrics.xlsx')
+
+
 
 
 
