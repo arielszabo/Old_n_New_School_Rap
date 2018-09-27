@@ -12,6 +12,7 @@ class GeniusScraper(object):
     def __init__(self, GENIUS_API_KEY):
         self.base_url = 'http://api.genius.com'
         self.headers = {'Authorization': f'Bearer {GENIUS_API_KEY}'}
+        self.all_songs_links = {}
 
     def get_artist_id(self, artist_name):
         response = requests.get(f'{self.base_url}/search?q={artist_name}',
@@ -27,22 +28,23 @@ class GeniusScraper(object):
 
     def get_artist_songs(self, artist_id, number_of_songs_desired):
         songs_links = []
+        page_number = 1
         while True:
-            page_number = 1
             response = requests.get(f'{self.base_url}/artists/{artist_id}/songs?per_page=50&page={page_number}',
                                     headers=self.headers).json()
 
             if int(response['meta']['status']) > 400:
                 print(json.dumps(response, indent=4))
 
-            elif not response['response']['next_page']: # if it is None
+            elif not response['response']['next_page']:  # if it is None
                 return songs_links
 
             else:
                 for song in response['response']['songs']:
                     if len(songs_links) == number_of_songs_desired:
                         return songs_links
-                    songs_links.append(song['url'])
+                    if not song['url'] in songs_links:
+                        songs_links.append(song['url'])
                 page_number += 1
 
     @staticmethod
@@ -65,8 +67,18 @@ class GeniusScraper(object):
         if artist_id:  # if it is not None
             song_urls = self.get_artist_songs(artist_id, number_of_songs_desired)
 
-            lyrics = [self.extract_lyrics_from_webpage(url) for url in song_urls]
-            return lyrics
+            # todo: look at this:
+            url_n_lyrics = []
+            for url in song_urls:
+                if url in self.all_songs_links:
+                    lyrics = self.all_songs_links[url]
+                else:
+                    lyrics = self.extract_lyrics_from_webpage(url)
+                    self.all_songs_links[url] = self.extract_lyrics_from_webpage(url)
+
+                url_n_lyrics.append((url, lyrics))
+            # lyrics = [(url, self.extract_lyrics_from_webpage(url)) for url in song_urls]
+            return url_n_lyrics
         else:
             logging.warning(f"Can't find {artist_name}")
 
@@ -80,18 +92,16 @@ if __name__ == '__main__':
     genius = GeniusScraper(genius_access_token)
     rappers = {
         'old_school_rappers': ['2pac', 'Jay-Z', 'Eazy-E', 'The Notorious B.I.G.', 'Nas', 'Ice Cube', 'LL Cool J',
-                               'Snoop Dogg', 'Mobb Deep', 'Big L', "Lil' Kim", 'N.W.A', 'Busta Rhymes', 'RUN-D.M.C',
-                               'Beastie Boys', 'Redman', 'Ice-T', 'Nate Dogg', 'Xzibit', 'MC Hammer', 'Big Pun',
-                               'Humpty Hump', 'Ludacris', 'Big Daddy Kane', 'Wu-Tang Clan', 'Warren G', 'Public Enemy',
-                               'Digital Underground', 'Redman', 'PUFF DADDY', 'Salt-N-Pepa', 'Common', 'DMX',
-                               'Bone Thugs-N-Harmony'],
+                               'Snoop Dogg', 'Mobb Deep', 'Big L', "Lil' Kim", 'N.W.A', 'Run-D.M.C.', 'Redman',
+                               'Beastie Boys', 'Ice-T', 'Nate Dogg', 'Xzibit', 'MC Hammer', 'Big Pun', 'PUFF DADDY',
+                               'Big Daddy Kane', 'Wu-Tang Clan', 'Warren G', 'Public Enemy', 'DMX', 'Salt-N-Pepa',
+                               'Digital Underground', 'Bone Thugs-N-Harmony'],
 
         'new_school_rappers': ['Tyler, the Creator', 'Schoolboy Q', 'Travis Scott', 'Big Sean', 'Chance The Rapper',
                                'A$AP Rocky', 'J. Cole', 'Drake', 'Wiz Khalifa', 'Nicki Minaj', 'Kendrick Lamar',
-                               'J. Cole', 'Joey Bada$$', 'Logic', 'Kanye West', 'Joyner Lucas', 'Wiz Khalifa',
+                               'Joey Bada$$', 'Logic', 'Kanye West', 'Joyner Lucas', 'Fetty Wap',
                                'Future', '2 Chainz', 'Lil Uzi Vert', 'Mac Miller', 'Rae Sremmurd', 'Lil Wayne',
-                               'Pusha T', 'Lupe Fiasco', 'The Game', 'B.o.B', 'LIL PUMP', 'Rick Ross', 'Cardi B',
-                               'Fetty Wap'],
+                               'Pusha-T', 'Lupe Fiasco', 'The Game', 'LIL PUMP', 'Rick Ross', 'Cardi B'],
     }
 
     data = []
@@ -99,16 +109,17 @@ if __name__ == '__main__':
         for rapper in rappers[rapper_type]:
             logging.info(f'Start extraction of a 100 songs by {rapper}')
             songs_lyrics = genius.songs_lyrics_by_artist(rapper, 100)
-            df = pd.DataFrame(songs_lyrics, columns=['lyrics'])
+            df = pd.DataFrame(songs_lyrics, columns=['song_url', 'lyrics'])
             df['artist'] = rapper
             df['rapper_type'] = rapper_type
             data.append(df)
 
     final_data = pd.concat(data, ignore_index=True)
+    final_data.dropna(inplace=True)  # some songs don't have lyrics
     print(final_data)
-    final_data.to_excel(r'lyrics.xlsx')
-    engine = sqlalchemy.create_engine('sqlite:///old_and_new_school_rappers.db')
-    final_data.to_sql(r'rap_lyrics', con=engine, if_exists='replace', index=False,)
+    final_data.to_excel(r'lyrics2.xlsx')
+    # engine = sqlalchemy.create_engine('sqlite:///old_and_new_school_rappers.db')
+    # final_data.to_sql(r'rap_lyrics', con=engine, if_exists='replace', index=False)
 
 
 
