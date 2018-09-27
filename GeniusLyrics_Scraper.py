@@ -1,9 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 import os
+import sqlalchemy
 import json
 import logging
 import pandas as pd
+
 
 # todo: don't extract same songs
 class GeniusScraper(object):
@@ -72,16 +74,24 @@ class GeniusScraper(object):
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s : %(levelname)s : %(message)s')
 
-    genius = GeniusScraper('l57FUc_YCYz4NlE_jotgLPlMFi9lBxUxMYlg39K20JUNcT5TQtU1vXiptDcge96G')
-    # x = genius.songs_lyrics_by_artist('2pac', 100)
-    # print(x)
-    # print(len(x))
+    with open('genius_access_token.txt', 'r') as g:  # This file contains the only the genius_access_token
+        genius_access_token = g.read()
 
+    genius = GeniusScraper(genius_access_token)
     rappers = {
-        'old_school_rappers': ['2pac', 'Jay-Z', 'Eazy-E', 'The Notorious B.I.G.', 'Nas', 'Ice Cube',
-                               'Snoop Dogg', 'Mobb Deep', 'Big L', "Lil' Kim"],
+        'old_school_rappers': ['2pac', 'Jay-Z', 'Eazy-E', 'The Notorious B.I.G.', 'Nas', 'Ice Cube', 'LL Cool J',
+                               'Snoop Dogg', 'Mobb Deep', 'Big L', "Lil' Kim", 'N.W.A', 'Busta Rhymes', 'RUN-D.M.C',
+                               'Beastie Boys', 'Redman', 'Ice-T', 'Nate Dogg', 'Xzibit', 'MC Hammer', 'Big Pun',
+                               'Humpty Hump', 'Ludacris', 'Big Daddy Kane', 'Wu-Tang Clan', 'Warren G', 'Public Enemy',
+                               'Digital Underground', 'Redman', 'PUFF DADDY', 'Salt-N-Pepa', 'Common', 'DMX',
+                               'Bone Thugs-N-Harmony'],
+
         'new_school_rappers': ['Tyler, the Creator', 'Schoolboy Q', 'Travis Scott', 'Big Sean', 'Chance The Rapper',
-                               'A$AP Rocky', 'J. Cole', 'Drake', 'Wiz Khalifa', 'Nicki Minaj'],
+                               'A$AP Rocky', 'J. Cole', 'Drake', 'Wiz Khalifa', 'Nicki Minaj', 'Kendrick Lamar',
+                               'J. Cole', 'Joey Bada$$', 'Logic', 'Kanye West', 'Joyner Lucas', 'Wiz Khalifa',
+                               'Future', '2 Chainz', 'Lil Uzi Vert', 'Mac Miller', 'Rae Sremmurd', 'Lil Wayne',
+                               'Pusha T', 'Lupe Fiasco', 'The Game', 'B.o.B', 'LIL PUMP', 'Rick Ross', 'Cardi B',
+                               'Fetty Wap'],
     }
 
     data = []
@@ -97,6 +107,8 @@ if __name__ == '__main__':
     final_data = pd.concat(data, ignore_index=True)
     print(final_data)
     final_data.to_excel(r'lyrics.xlsx')
+    engine = sqlalchemy.create_engine('sqlite:///old_and_new_school_rappers.db')
+    final_data.to_sql(r'rap_lyrics', con=engine, if_exists='replace', index=False,)
 
 
 
