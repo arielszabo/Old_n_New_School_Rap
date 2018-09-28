@@ -34,10 +34,7 @@ class GeniusScraper(object):
                                     headers=self.headers).json()
 
             if int(response['meta']['status']) > 400:
-                print(json.dumps(response, indent=4))
-
-            elif not response['response']['next_page']:  # if it is None
-                return songs_links
+                logging.warning(json.dumps(response, indent=4))
 
             else:
                 for song in response['response']['songs']:
@@ -45,7 +42,11 @@ class GeniusScraper(object):
                         return songs_links
                     if not song['url'] in songs_links:
                         songs_links.append(song['url'])
-                page_number += 1
+
+                if not response['response']['next_page']:  # if it is None
+                    return songs_links
+                else:
+                    page_number += 1
 
     @staticmethod
     def extract_lyrics_from_webpage(page_url):
@@ -66,6 +67,7 @@ class GeniusScraper(object):
         artist_id = self.get_artist_id(artist_name)
         if artist_id:  # if it is not None
             song_urls = self.get_artist_songs(artist_id, number_of_songs_desired)
+            logging.info(f'Found {len(song_urls)} songs of {artist_name}')
 
             # todo: look at this:
             url_n_lyrics = []
@@ -107,8 +109,8 @@ if __name__ == '__main__':
     data = []
     for rapper_type in rappers:
         for rapper in rappers[rapper_type]:
-            logging.info(f'Start extraction of a 100 songs by {rapper}')
-            songs_lyrics = genius.songs_lyrics_by_artist(rapper, 100)
+            logging.info(f'Start extraction of 300 songs by {rapper}')
+            songs_lyrics = genius.songs_lyrics_by_artist(rapper, 300)
             df = pd.DataFrame(songs_lyrics, columns=['song_url', 'lyrics'])
             df['artist'] = rapper
             df['rapper_type'] = rapper_type
