@@ -11,23 +11,31 @@ from ariels_utils import MLTester
 from sklearn.svm import SVC
 from sklearn.decomposition import TruncatedSVD
 from sklearn.model_selection import train_test_split
-from sklearn import metrics
-from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
+import spacy
 
 
-class StemmedVectorizer_analyzer(TfidfVectorizer):
-    def custom_stop_words(self):
-        english_stop_words = set(stopwords.words("english"))
+class CustomVectorizer(TfidfVectorizer):
+    def __init__(self, language='en', *args, **kwargs):
+        super(CustomVectorizer, self).__init__(*args, **kwargs)
+        self.language = language
 
-        return english_stop_words
+    # create the analyzer that will be returned by this method
+    def custom_analyzer(self, doc):
+        # apply the preprocessing and tokenzation steps
+        nlp = spacy.load(self.language)  # todo: if it's not english ?
+        tokens = nlp(doc.lower())
+        lemmatized_tokens = [token.lemma_ for token in tokens]
 
+        # use sklearn-vectorizer's _word_ngrams built in method
+        # to remove stop words and extract n-grams
+        return self._word_ngrams(lemmatized_tokens, self.get_stop_words())
+
+    # overwrite the build_analyzer method, allowing one to
+    # create a custom analyzer for the vectorizer
     def build_analyzer(self):
-        analyzer = super(StemmedVectorizer_analyzer, self).build_analyzer()
-        stemmer = SnowballStemmer("english")
-        english_stop_words = self.custom_stop_words()
-        return lambda doc: ([stemmer.stem(w) for w in analyzer(doc) if w not in english_stop_words])
+        return self.custom_analyzer
 
 
 # This function gets a raw lyrics string and returns it cleaned after the steps described:
@@ -58,6 +66,7 @@ def clean_df(data):
     # Drop all the strange, ood, snippet, skit data etc ...
     bad = pd.concat([skit_songs, all_snippet, no_lyrics_in_url, no_english_lyrics])
     data.drop(set(bad.index), inplace=True)
+    data['word_count'] = data['lyrics'].apply(lambda lyrics: len(lyrics.split()))
     # Drop high word count
     data.drop(data.query('word_count > 1300').index, inplace=True)
     # Drop low word count
@@ -65,6 +74,7 @@ def clean_df(data):
     # Drop duplicates
     data.drop_duplicates(subset=['lyrics'], inplace=True)
     data['clean_lyrics'] = data['lyrics'].apply(clean_song_lyrics)
+
     slang_word_convertor = {
         "aint": "are not",
         "cause": "because",
@@ -117,8 +127,10 @@ if __name__ == '__main__':
 
     model = Pipeline(
             [
-                ('vec', StemmedVectorizer_analyzer(binary=True, max_df=0.4,
-                                                  min_df=0.001, ngram_range=(1, 2))),
+                ('vec', CustomVectorizer(binary=True, max_df=0.4, stop_words='english', min_df=0.001,
+                                         ngram_range=(1, 2))),
+                # ('vec', StemmedVectorizerAnalyzer(binary=True, max_df=0.4,
+                #                                   min_df=0.001, ngram_range=(1, 2))),
                 # ('clening', FunctionTransformer(clean_song_lyrics, validate=False)),
                 # ('vec', text.TfidfVectorizer(binary=True, stop_words=english_stop_words, max_df=0.4,
                 #                              min_df=0.001, ngram_range=(1, 2))),
@@ -141,6 +153,9 @@ if __name__ == '__main__':
 
     X = clean_data['clean_lyrics']
     y = clean_data['rapper_type']
+
+    print(MLTester(model, X, y, scoring_method='f1_weighted', n_jobs=3, splitting_method=RepeatedStratifiedKFold,
+                   splitting_method_params={'n_splits': 5}).run())
 
     params = {
         #     'logreg__C':np.arange(0.1, 1.5, 0.1), #np.arange(1, 100, 10),#25 #[0.001, 0.01, 0.1, 1, 10, 100]=>10,
@@ -165,6 +180,6 @@ if __name__ == '__main__':
 
     }
 
-    gcv = GridSearchCV(model, params, cv=4, n_jobs=3, verbose=3, scoring='f1_weighted')
+    gcv = GridSearchCV(model, params, cv=4, n_jobs=1, verbose=3, scoring='f1_weighted')
     gcv.fit(X, y)
     print(gcv.best_score_, gcv.best_params_)
