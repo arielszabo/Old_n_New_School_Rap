@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 import os, re
-from sklearn.model_selection import RepeatedStratifiedKFold, GridSearchCV
+from sklearn.model_selection import RepeatedStratifiedKFold
+from dask_searchcv import GridSearchCV
 from sklearn.feature_extraction import text
 from sklearn.preprocessing import FunctionTransformer, MaxAbsScaler
 from sklearn.linear_model import LogisticRegression, SGDClassifier
@@ -180,6 +181,6 @@ if __name__ == '__main__':
 
     }
 
-    gcv = GridSearchCV(model, params, cv=4, n_jobs=1, verbose=3, scoring='f1_weighted')
+    gcv = GridSearchCV(model, params, cv=4, n_jobs=1, scoring='f1_weighted')
     gcv.fit(X, y)
     print(gcv.best_score_, gcv.best_params_)
