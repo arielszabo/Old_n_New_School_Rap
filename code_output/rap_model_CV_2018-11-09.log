@@ -1,0 +1,37 @@
+2018-11-09 12:40:58,026 : INFO : Clean bad input lyrics
+2018-11-09 12:40:58,413 : INFO : Drop high word count
+2018-11-09 12:40:58,419 : INFO : Drop low word count
+2018-11-09 12:40:58,503 : INFO : Drop duplicate lyrics
+2018-11-09 12:41:00,935 : INFO : clean lyrics
+2018-11-09 12:41:18,420 : INFO : clean slang word convertor
+2018-11-09 12:41:44,168 : INFO : clean custom names from lyrics
+2018-11-09 12:41:44,168 : INFO : Starting_to_train
+2018-11-09 12:42:31,051 : INFO : Clean bad input lyrics
+2018-11-09 12:42:31,404 : INFO : Drop high word count
+2018-11-09 12:42:31,407 : INFO : Drop low word count
+2018-11-09 12:42:31,487 : INFO : Drop duplicate lyrics
+2018-11-09 12:42:33,771 : INFO : clean lyrics
+2018-11-09 12:42:50,879 : INFO : clean slang word convertor
+2018-11-09 12:43:16,945 : INFO : clean custom names from lyrics
+2018-11-09 12:43:16,946 : INFO : Starting_to_train
+2018-11-09 12:50:07,572 : INFO : Clean bad input lyrics
+2018-11-09 12:50:07,929 : INFO : Drop high word count
+2018-11-09 12:50:07,933 : INFO : Drop low word count
+2018-11-09 12:50:08,011 : INFO : Drop duplicate lyrics
+2018-11-09 12:50:10,336 : INFO : clean lyrics
+2018-11-09 12:50:25,884 : INFO : Clean bad input lyrics
+2018-11-09 12:50:26,245 : INFO : Drop high word count
+2018-11-09 12:50:26,249 : INFO : Drop low word count
+2018-11-09 12:50:26,328 : INFO : Drop duplicate lyrics
+2018-11-09 12:50:28,613 : INFO : clean lyrics
+2018-11-09 12:50:45,490 : INFO : clean slang word convertor
+2018-11-09 12:51:11,521 : INFO : clean custom names from lyrics
+2018-11-09 12:51:11,521 : INFO : Starting_to_train
+2018-11-09 12:54:49,507 : INFO : Clean bad input lyrics
+2018-11-09 12:54:49,878 : INFO : Drop high word count
+2018-11-09 12:54:49,882 : INFO : Drop low word count
+2018-11-09 12:54:49,964 : INFO : Drop duplicate lyrics
+2018-11-09 12:54:52,367 : INFO : clean lyrics
+2018-11-09 12:55:09,665 : INFO : clean slang word convertor
+2018-11-09 12:55:35,609 : INFO : clean custom names from lyrics
+2018-11-09 12:55:35,610 : INFO : Starting_to_train

@@ -1,0 +1,213 @@
+2018-11-18 19:49:38,524 : INFO : Clean bad input lyrics
+2018-11-18 19:49:38,883 : INFO : Drop high word count
+2018-11-18 19:49:38,887 : INFO : Drop low word count
+2018-11-18 19:49:38,966 : INFO : Drop duplicate lyrics
+2018-11-18 19:49:41,287 : INFO : clean lyrics
+2018-11-18 19:49:58,405 : INFO : clean slang word convertor
+2018-11-18 19:50:24,386 : INFO : clean custom names from lyrics
+2018-11-18 19:50:24,927 : INFO : Starting_to_train
+2018-11-18 19:50:51,000 : INFO : Clean bad input lyrics
+2018-11-18 19:50:51,007 : INFO : Drop high word count
+2018-11-18 19:50:51,009 : INFO : Drop low word count
+2018-11-18 19:50:51,010 : INFO : Drop duplicate lyrics
+2018-11-18 19:50:51,020 : INFO : clean lyrics
+2018-11-18 19:50:51,100 : INFO : clean slang word convertor
+2018-11-18 19:50:51,106 : INFO : clean custom names from lyrics
+2018-11-18 19:50:51,651 : INFO : Starting_to_train
+2018-11-18 19:53:23,612 : INFO : Clean bad input lyrics
+2018-11-18 19:53:23,619 : INFO : Drop high word count
+2018-11-18 19:53:23,622 : INFO : Drop low word count
+2018-11-18 19:53:23,623 : INFO : Drop duplicate lyrics
+2018-11-18 19:53:23,634 : INFO : clean lyrics
+2018-11-18 19:53:23,717 : INFO : clean slang word convertor
+2018-11-18 19:53:23,723 : INFO : clean custom names from lyrics
+2018-11-18 19:53:24,251 : INFO : Starting_to_train
+2018-11-18 19:57:48,765 : INFO : Clean bad input lyrics
+2018-11-18 19:57:48,772 : INFO : Drop high word count
+2018-11-18 19:57:48,774 : INFO : Drop low word count
+2018-11-18 19:57:48,775 : INFO : Drop duplicate lyrics
+2018-11-18 19:57:48,785 : INFO : clean lyrics
+2018-11-18 19:57:48,864 : INFO : clean slang word convertor
+2018-11-18 19:57:48,870 : INFO : clean custom names from lyrics
+2018-11-18 19:57:49,383 : INFO : Starting_to_train
+2018-11-18 19:58:24,170 : INFO : Clean bad input lyrics
+2018-11-18 19:58:24,177 : INFO : Drop high word count
+2018-11-18 19:58:24,179 : INFO : Drop low word count
+2018-11-18 19:58:24,180 : INFO : Drop duplicate lyrics
+2018-11-18 19:58:24,190 : INFO : clean lyrics
+2018-11-18 19:58:24,270 : INFO : clean slang word convertor
+2018-11-18 19:58:24,276 : INFO : clean custom names from lyrics
+2018-11-18 19:58:24,779 : INFO : Starting_to_train
+2018-11-18 19:59:41,474 : INFO : Clean bad input lyrics
+2018-11-18 19:59:41,481 : INFO : Drop high word count
+2018-11-18 19:59:41,483 : INFO : Drop low word count
+2018-11-18 19:59:41,485 : INFO : Drop duplicate lyrics
+2018-11-18 19:59:41,495 : INFO : clean lyrics
+2018-11-18 19:59:41,577 : INFO : clean slang word convertor
+2018-11-18 19:59:41,583 : INFO : clean custom names from lyrics
+2018-11-18 19:59:42,124 : INFO : Starting_to_train
+2018-11-18 20:00:56,906 : INFO : Clean bad input lyrics
+2018-11-18 20:00:56,913 : INFO : Drop high word count
+2018-11-18 20:00:56,915 : INFO : Drop low word count
+2018-11-18 20:00:56,917 : INFO : Drop duplicate lyrics
+2018-11-18 20:00:56,927 : INFO : clean lyrics
+2018-11-18 20:00:57,008 : INFO : clean slang word convertor
+2018-11-18 20:00:57,014 : INFO : clean custom names from lyrics
+2018-11-18 20:00:57,534 : INFO : Starting_to_train
+2018-11-18 20:01:13,642 : INFO : Clean bad input lyrics
+2018-11-18 20:01:13,649 : INFO : Drop high word count
+2018-11-18 20:01:13,651 : INFO : Drop low word count
+2018-11-18 20:01:13,653 : INFO : Drop duplicate lyrics
+2018-11-18 20:01:13,663 : INFO : clean lyrics
+2018-11-18 20:01:13,742 : INFO : clean slang word convertor
+2018-11-18 20:01:13,748 : INFO : clean custom names from lyrics
+2018-11-18 20:01:14,262 : INFO : Starting_to_train
+2018-11-18 20:01:25,943 : INFO : Clean bad input lyrics
+2018-11-18 20:01:25,949 : INFO : Drop high word count
+2018-11-18 20:01:25,951 : INFO : Drop low word count
+2018-11-18 20:01:25,953 : INFO : Drop duplicate lyrics
+2018-11-18 20:01:25,963 : INFO : clean lyrics
+2018-11-18 20:01:26,042 : INFO : clean slang word convertor
+2018-11-18 20:01:26,048 : INFO : clean custom names from lyrics
+2018-11-18 20:01:26,557 : INFO : Starting_to_train
+2018-11-18 20:01:39,950 : INFO : Clean bad input lyrics
+2018-11-18 20:01:39,956 : INFO : Drop high word count
+2018-11-18 20:01:39,958 : INFO : Drop low word count
+2018-11-18 20:01:39,960 : INFO : Drop duplicate lyrics
+2018-11-18 20:01:39,970 : INFO : clean lyrics
+2018-11-18 20:01:40,050 : INFO : clean slang word convertor
+2018-11-18 20:01:40,055 : INFO : clean custom names from lyrics
+2018-11-18 20:01:40,572 : INFO : Starting_to_train
+2018-11-18 20:01:57,048 : INFO : Clean bad input lyrics
+2018-11-18 20:01:57,055 : INFO : Drop high word count
+2018-11-18 20:01:57,057 : INFO : Drop low word count
+2018-11-18 20:01:57,059 : INFO : Drop duplicate lyrics
+2018-11-18 20:01:57,069 : INFO : clean lyrics
+2018-11-18 20:01:57,149 : INFO : clean slang word convertor
+2018-11-18 20:01:57,155 : INFO : clean custom names from lyrics
+2018-11-18 20:01:57,665 : INFO : Starting_to_train
+2018-11-18 20:02:40,923 : INFO : Clean bad input lyrics
+2018-11-18 20:02:40,930 : INFO : Drop high word count
+2018-11-18 20:02:40,932 : INFO : Drop low word count
+2018-11-18 20:02:40,934 : INFO : Drop duplicate lyrics
+2018-11-18 20:02:40,944 : INFO : clean lyrics
+2018-11-18 20:02:41,023 : INFO : clean slang word convertor
+2018-11-18 20:02:41,029 : INFO : clean custom names from lyrics
+2018-11-18 20:02:41,538 : INFO : Starting_to_train
+2018-11-18 20:03:05,195 : INFO : Clean bad input lyrics
+2018-11-18 20:03:05,202 : INFO : Drop high word count
+2018-11-18 20:03:05,204 : INFO : Drop low word count
+2018-11-18 20:03:05,205 : INFO : Drop duplicate lyrics
+2018-11-18 20:03:05,215 : INFO : clean lyrics
+2018-11-18 20:03:05,295 : INFO : clean slang word convertor
+2018-11-18 20:03:05,301 : INFO : clean custom names from lyrics
+2018-11-18 20:03:05,803 : INFO : Starting_to_train
+2018-11-18 20:08:25,359 : INFO : Clean bad input lyrics
+2018-11-18 20:08:25,365 : INFO : Drop high word count
+2018-11-18 20:08:25,367 : INFO : Drop low word count
+2018-11-18 20:08:25,369 : INFO : Drop duplicate lyrics
+2018-11-18 20:08:25,379 : INFO : clean lyrics
+2018-11-18 20:08:25,458 : INFO : clean slang word convertor
+2018-11-18 20:08:25,464 : INFO : clean custom names from lyrics
+2018-11-18 20:08:25,969 : INFO : Starting_to_train
+2018-11-18 20:08:48,431 : INFO : Clean bad input lyrics
+2018-11-18 20:08:48,437 : INFO : Drop high word count
+2018-11-18 20:08:48,439 : INFO : Drop low word count
+2018-11-18 20:08:48,441 : INFO : Drop duplicate lyrics
+2018-11-18 20:08:48,451 : INFO : clean lyrics
+2018-11-18 20:08:48,530 : INFO : clean slang word convertor
+2018-11-18 20:08:48,536 : INFO : clean custom names from lyrics
+2018-11-18 20:08:49,039 : INFO : Starting_to_train
+2018-11-18 20:09:11,075 : INFO : Clean bad input lyrics
+2018-11-18 20:09:11,082 : INFO : Drop high word count
+2018-11-18 20:09:11,084 : INFO : Drop low word count
+2018-11-18 20:09:11,085 : INFO : Drop duplicate lyrics
+2018-11-18 20:09:11,095 : INFO : clean lyrics
+2018-11-18 20:09:11,176 : INFO : clean slang word convertor
+2018-11-18 20:09:11,182 : INFO : clean custom names from lyrics
+2018-11-18 20:09:11,688 : INFO : Starting_to_train
+2018-11-18 20:09:25,745 : INFO : Clean bad input lyrics
+2018-11-18 20:09:25,751 : INFO : Drop high word count
+2018-11-18 20:09:25,753 : INFO : Drop low word count
+2018-11-18 20:09:25,755 : INFO : Drop duplicate lyrics
+2018-11-18 20:09:25,765 : INFO : clean lyrics
+2018-11-18 20:09:25,844 : INFO : clean slang word convertor
+2018-11-18 20:09:25,850 : INFO : clean custom names from lyrics
+2018-11-18 20:09:26,371 : INFO : Starting_to_train
+2018-11-18 20:09:39,916 : INFO : Clean bad input lyrics
+2018-11-18 20:09:39,925 : INFO : Drop high word count
+2018-11-18 20:09:39,927 : INFO : Drop low word count
+2018-11-18 20:09:39,930 : INFO : Drop duplicate lyrics
+2018-11-18 20:09:39,959 : INFO : clean lyrics
+2018-11-18 20:09:40,178 : INFO : clean slang word convertor
+2018-11-18 20:09:40,194 : INFO : clean custom names from lyrics
+2018-11-18 20:09:40,716 : INFO : Starting_to_train
+2018-11-18 20:14:44,435 : INFO : Clean bad input lyrics
+2018-11-18 20:14:44,793 : INFO : Drop high word count
+2018-11-18 20:14:44,797 : INFO : Drop low word count
+2018-11-18 20:14:44,876 : INFO : Drop duplicate lyrics
+2018-11-18 20:14:47,176 : INFO : clean lyrics
+2018-11-18 20:14:57,107 : INFO : Clean bad input lyrics
+2018-11-18 20:14:57,114 : INFO : Drop high word count
+2018-11-18 20:14:57,116 : INFO : Drop low word count
+2018-11-18 20:14:57,117 : INFO : Drop duplicate lyrics
+2018-11-18 20:14:57,127 : INFO : clean lyrics
+2018-11-18 20:14:57,207 : INFO : clean slang word convertor
+2018-11-18 20:14:57,213 : INFO : clean custom names from lyrics
+2018-11-18 20:14:57,733 : INFO : Starting_to_train
+2018-11-18 20:17:00,475 : INFO : Clean bad input lyrics
+2018-11-18 20:17:00,482 : INFO : Drop high word count
+2018-11-18 20:17:00,484 : INFO : Drop low word count
+2018-11-18 20:17:00,485 : INFO : Drop duplicate lyrics
+2018-11-18 20:17:00,495 : INFO : clean lyrics
+2018-11-18 20:17:00,575 : INFO : clean slang word convertor
+2018-11-18 20:17:00,581 : INFO : clean custom names from lyrics
+2018-11-18 20:17:01,095 : INFO : Starting_to_train
+2018-11-18 20:17:04,628 : INFO :                     precision    recall  f1-score   support
+
+old_school_rappers       1.00      1.00      1.00        32
+
+         micro avg       1.00      1.00      1.00        32
+         macro avg       1.00      1.00      1.00        32
+      weighted avg       1.00      1.00      1.00        32
+
+2018-11-18 20:17:05,543 : INFO :                     precision    recall  f1-score   support
+
+old_school_rappers       1.00      1.00      1.00        11
+
+         micro avg       1.00      1.00      1.00        11
+         macro avg       1.00      1.00      1.00        11
+      weighted avg       1.00      1.00      1.00        11
+
+2018-11-18 20:17:27,832 : INFO : Clean bad input lyrics
+2018-11-18 20:17:28,196 : INFO : Drop high word count
+2018-11-18 20:17:28,200 : INFO : Drop low word count
+2018-11-18 20:17:28,280 : INFO : Drop duplicate lyrics
+2018-11-18 20:17:30,583 : INFO : clean lyrics
+2018-11-18 20:17:47,532 : INFO : clean slang word convertor
+2018-11-18 20:18:12,724 : INFO : clean custom names from lyrics
+2018-11-18 20:18:13,257 : INFO : Starting_to_train
+2018-11-18 20:33:33,943 : INFO : Clean bad input lyrics
+2018-11-18 20:33:34,313 : INFO : Drop high word count
+2018-11-18 20:33:34,316 : INFO : Drop low word count
+2018-11-18 20:33:34,396 : INFO : Drop duplicate lyrics
+2018-11-18 20:33:36,706 : INFO : clean lyrics
+2018-11-18 20:33:53,572 : INFO : clean slang word convertor
+2018-11-18 20:34:18,641 : INFO : clean custom names from lyrics
+2018-11-18 20:34:19,175 : INFO : Starting_to_train
+2018-11-18 21:35:02,980 : INFO : Clean bad input lyrics
+2018-11-18 21:35:03,346 : INFO : Drop high word count
+2018-11-18 21:35:03,350 : INFO : Drop low word count
+2018-11-18 21:35:03,431 : INFO : Drop duplicate lyrics
+2018-11-18 21:35:05,796 : INFO : clean lyrics
+2018-11-18 21:35:23,203 : INFO : clean slang word convertor
+2018-11-18 21:35:49,073 : INFO : clean custom names from lyrics
+2018-11-18 21:35:49,667 : INFO : Starting_to_train
+2018-11-18 21:57:30,329 : INFO : Clean bad input lyrics
+2018-11-18 21:57:30,686 : INFO : Drop high word count
+2018-11-18 21:57:30,690 : INFO : Drop low word count
+2018-11-18 21:57:30,769 : INFO : Drop duplicate lyrics
+2018-11-18 21:57:33,067 : INFO : clean lyrics
+2018-11-18 21:57:50,090 : INFO : clean slang word convertor
+2018-11-18 21:58:15,621 : INFO : clean custom names from lyrics
+2018-11-18 21:58:16,192 : INFO : Starting_to_train

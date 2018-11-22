@@ -1,0 +1,14 @@
+2018-11-22 22:43:03,049 : INFO : Clean bad input lyrics
+2018-11-22 22:43:03,410 : INFO : Drop high word count
+2018-11-22 22:43:03,414 : INFO : Drop low word count
+2018-11-22 22:43:03,495 : INFO : Drop duplicate lyrics
+2018-11-22 22:43:05,802 : INFO : clean lyrics
+2018-11-22 22:43:22,725 : INFO : clean slang word convertor
+2018-11-22 22:43:47,866 : INFO : clean custom names from lyrics
+2018-11-22 22:43:49,008 : INFO : Starting_to_train
+2018-11-22 22:57:38,192 : INFO : Clean bad input lyrics
+2018-11-22 22:57:38,549 : INFO : Drop high word count
+2018-11-22 22:57:38,552 : INFO : Drop low word count
+2018-11-22 22:57:38,632 : INFO : Drop duplicate lyrics
+2018-11-22 22:57:40,962 : INFO : clean lyrics
+2018-11-22 22:57:57,752 : INFO : clean slang word convertor
