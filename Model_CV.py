@@ -20,7 +20,8 @@ from nltk.stem import SnowballStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer, TfidfTransformer
 from sklearn import metrics
 import xgboost as xgb
-import hashlib
+import json
+from scipy import sparse
 import glob
 
 
@@ -40,14 +41,20 @@ def logging_setup(output_folder, output_file_name):
     return logger
 
 
-def load_exported_file(input_data_path):
+def load_exported_file(input_data_path, file_name):
     input_mtime = str(os.path.getmtime(input_data_path)).replace('.', '')
-    files_found = glob.glob(os.path.join('code_output', f'*{input_mtime}*'), recursive=True)
+    files_found = glob.glob(os.path.join('code_output', f'{file_name}*{input_mtime}*'), recursive=True)
     if len(files_found) > 1:
         logging.warning(f"There is more than 1 files:\n {files_found}")
     elif len(files_found) == 1:
         logging.info(f"Found a good file so there is no need to compute BOW again:\n {files_found[0]}")
-        return pd.read_csv(os.path.join('code_output', files_found[0]))
+        if str(files_found[0]).endswith('npy'):
+            return np.load(files_found[0])
+        elif str(files_found[0]).endswith('json'):
+            with open(files_found[0]) as jfile:
+                return json.load(jfile)
+        elif str(files_found[0]).endswith('npz'):
+            return sparse.load_npz(files_found[0])
     else:
         return None
 
@@ -183,11 +190,12 @@ if __name__ == '__main__':
     model = Pipeline(
         [
             ('tfidf', TfidfTransformer()),
-            ('xgb', xgb.XGBClassifier(max_depth=3, learning_rate=0.1, n_estimators=100, silent=True,
-                                      objective='binary:logistic', booster='gblinear', n_jobs=-1, nthread=None,
-                                      gamma=0, min_child_weight=1, max_delta_step=0, subsample=1,
-                                      colsample_bytree=1,
-                                      colsample_bylevel=1, reg_alpha=0, reg_lambda=1))
+            # ('xgb', xgb.XGBClassifier(max_depth=3, learning_rate=0.1, n_estimators=100, silent=True,
+            #                           objective='binary:logistic', booster='gblinear', n_jobs=-1, nthread=None,
+            #                           gamma=0, min_child_weight=1, max_delta_step=0, subsample=1,
+            #                           colsample_bytree=1,
+            #                           colsample_bylevel=1, reg_alpha=0, reg_lambda=1))
+            ('logreg', LogisticRegression(penalty='l1'))
             # ('svm', SVC(gamma=3, C=100))
         ]
     )
@@ -201,23 +209,41 @@ if __name__ == '__main__':
     # The next chapter is for run time saving, there is no need to do all the CustomVectorizer
     # if we already did it once and the data haven't changed:
 
-    vec_train = load_exported_file(input_data)
+    vec_train_arr = load_exported_file(input_data, 'vec_train')
+    vec_test_arr = load_exported_file(input_data, 'vec_test')
     # There isn't a file with the same name as the last modified date of the input data (aka data has changed):
-    if not vec_train:
+    if isinstance(vec_train_arr, type(None)) or isinstance(vec_test_arr, type(None)):
+        logging.info('Needs to compute train_vectors')
         vec_train_arr = pre_model.fit_transform(x_train)
-        np.save(vec_train_arr, f'vec_train_{str(os.path.getmtime(input_data)).replace(".", "")}.npy')
-        # vec_feature_names = pre_model.get_feature_names()
-        # vec_train = pd.DataFrame(vec_train_arr.toarray(), columns=pre_model.get_feature_names())
-        # vec_train.to_csv(f'vec_train_{str(os.path.getmtime(input_data)).replace(".", "")}.csv', chunksize=100)
+        sparse.save_npz(os.path.join('code_output',
+                                     f'vec_train_{str(os.path.getmtime(input_data)).replace(".", "")}.npz'),
+                        vec_train_arr)
+
+        vec_test_arr = pre_model.transform(x_test)
+        sparse.save_npz(os.path.join('code_output',
+                                     f'vec_test_{str(os.path.getmtime(input_data)).replace(".", "")}.npz'),
+                        vec_test_arr)
+
+    vec_feature_names = load_exported_file(input_data, 'vec_feature_names')
+    if not vec_feature_names:
+        logging.info('Needs to compute feature vector names')
+        vec_feature_names = pre_model.get_feature_names()
+        with open(os.path.join('code_output',
+                               f'vec_feature_names_{str(os.path.getmtime(input_data)).replace(".", "")}.json'),
+                  'w') as jfile:
+            json.dump(vec_feature_names, jfile)
+
+    # vec_train_arr = pd.DataFrame(vec_train_arr.toarray(), columns=vec_feature_names)
+    # vec_test_arr = pd.DataFrame(vec_test_arr.toarray(), columns=vec_feature_names)
 
     # Fit the rest of the model
-
-    model.fit(vec_train, y_train)
-    y_pred_train = model.predict(vec_train)
+    # print(vec_train_arr)
+    # print(y_train)
+    model.fit(vec_train_arr, y_train)
+    y_pred_train = model.predict(vec_train_arr)
     logging.info(metrics.classification_report(y_train, y_pred_train))
 
-    x_test_vec = pre_model.transform(x_test)
-    y_pred = model.predict(x_test_vec)
+    y_pred = model.predict(vec_test_arr)
     logging.info(metrics.classification_report(y_test, y_pred))
 
     exit()
